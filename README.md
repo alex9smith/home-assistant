@@ -9,4 +9,5 @@ Install dependencies from the requirements file
 To run locally in dev mode:
 
 export FLASK_APP=main.py
+export FLASK_ENV=development
 flask run
