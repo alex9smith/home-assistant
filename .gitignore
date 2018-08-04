@@ -1,4 +1,5 @@
 variables.py
+.DS_Store
 
 # Github default Python .gitignore
 # Byte-compiled / optimized / DLL files
