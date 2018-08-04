@@ -1,0 +1,8 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-panel-fixed {
+    height: 30px;
+    overflow: hidden;
+}

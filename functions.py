@@ -10,7 +10,7 @@ from datetime import datetime
 def is_valid_storage_id(id):
     # Checks to see if the supplied id is a valid storage id
     # Returns true or false
-    if type(id) == str and '|' in id:
+    if type(id) == str and '~' in id:
         return True
 
     else:
@@ -110,7 +110,7 @@ def add_item_to_storage(name, location):
     db = client[MONGO_DB_DBASE]
     collection = db['storage']
     item = {
-        '_id': str(name).lower().replace(' ', '-') + '|' + str(location).lower().replace(' ', '-'),
+        '_id': str(name).lower().replace(' ', '-') + '~' + str(location).lower().replace(' ', '-'),
         'name': str(name).lower(),
         'location': str(location),
         'added': datetime.now().strftime("%s")

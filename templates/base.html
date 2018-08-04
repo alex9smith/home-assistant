@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% if title %}
+    <title>{{title}} | Home Assistant</title>
+    {% else %}
+    <title>Home Assistant</title>
+    {% endif %} 
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/shopping-list.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/materialize.min.css" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- JS -->
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    {% if scripts %}
+    {% for script in scripts %}
+    <script src="{{script}}"></script>
+    {% endfor %}
+    {% endif %}
+    <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+
+    <meta name="description" content="The shopping list function for the home assistant.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <nav class="light-blue darken-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo"><i class="material-icons md-48">shopping_cart</i></a>
+            <ul class="right hide-on-med-and-down">
+            <li><a href="/shoppinglist">Shopping List</a></li>
+            <li><a href="/storage">Storage</a></li>
+            </ul>
+    
+            <ul id="nav-mobile" class="sidenav">
+            <li><a href="/shoppinglist">Shopping List</a></li>
+            <li><a href="/storage">Storage</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <footer></footer>
+</body>
+</html>

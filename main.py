@@ -1,5 +1,5 @@
 # Contains the main structure of the Flask app
-from flask import Flask, Response, request
+from flask import Flask, Response, request, render_template
 from functions import *
 from variables import *
 
@@ -49,7 +49,7 @@ def api_manage_shopping_list(id):
             if item:
                 response = {
                     'status': 'Success',
-                    'item': item
+                    'items': item
                 }
 
             else:
@@ -60,7 +60,7 @@ def api_manage_shopping_list(id):
             item = add_item_to_shopping_list(id)
             response = {
                 'status': 'Success',
-                'item': item
+                'items': item
             }
 
         elif request.method == 'DELETE':
@@ -123,23 +123,23 @@ def api_manage_storage(id):
             if is_valid_storage_id(id):
                 response = {
                     'status': 'Success',
-                    'item': search_stored_items_by_id(id)
+                    'items': search_stored_items_by_id(id)
                 }
 
             else:
                 response = {
                     'status': 'Success',
-                    'item': search_stored_items_by_name(id)
+                    'items': search_stored_items_by_name(id)
                 }
 
         elif request.method == 'PUT':
             # Add the item
             if is_valid_storage_id(id):
 
-                name, location = id.split('|')
+                name, location = id.split('~')
                 response = {
                     'status': 'Success',
-                    'item': add_item_to_storage(name, location)
+                    'items': add_item_to_storage(name, location)
                 }
             else:
                 raise NameError('The provided ID is not valid. Name and location are both reqiured.')
@@ -152,7 +152,7 @@ def api_manage_storage(id):
                 if deleted:
                     response = {
                         'status': 'Success',
-                        'item': deleted
+                        'items': deleted
                     }
                 else:
                     raise FileNotFoundError('No item found with that ID') 
@@ -163,7 +163,7 @@ def api_manage_storage(id):
                     if len(deleted) == 1:
                         response = {
                             'status': 'Success',
-                            'item': deleted
+                            'items': deleted
                         }
                     else:
                         raise FileExistsError('Multiple items with that name were found. Please specify a location as well')
@@ -208,7 +208,7 @@ def api_list_items_in_location(location):
     try:
         response = {
             'status': 'Success',
-            'locations': get_items_stored_in_location(location)
+            'items': get_items_stored_in_location(location)
         }
 
     except Exception as e:
@@ -220,3 +220,8 @@ def api_list_items_in_location(location):
 
     return Response(json.dumps(response), mimetype='application/json', status = status_code)
         
+## Webpage routes
+
+@app.route('/shoppinglist')
+def render_shopping_list():
+    return render_template('shopping-list.html', title = 'Shopping List', scripts = ['/static/js/shopping-list.js'])
