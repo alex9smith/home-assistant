@@ -14,10 +14,14 @@ function renderItem(item) {
 };
 
 function getAndRenderShoppingListItems() {
-    // Deletes all the li items then
+    // Hides the preloader
+    // then Dletes all the li items
     // Hits the API and renders the list again
+    $('#preloader').remove();
     $('li.collection-item').remove();
+
     $.get('/api/v1/shoppinglist', function(data, status) {
+        $('.post-load').show();
         data['items'].forEach(element => {
             renderItem(element);
         });
@@ -71,7 +75,7 @@ $(document).ready(function(){
     $('.sidenav').sidenav();
 
     // Load items on list from API and render
-    items = getAndRenderShoppingListItems();
+    getAndRenderShoppingListItems();
 
     // Set up listener for the input box
     $(document).keypress(function(e) {

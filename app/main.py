@@ -225,3 +225,7 @@ def api_list_items_in_location(location):
 @app.route('/shoppinglist')
 def render_shopping_list():
     return render_template('shopping-list.html', title = 'Shopping List', scripts = ['/static/js/shopping-list.js'])
+
+@app.route('/storage')
+def render_storage():
+    return 'Coming soon!'
